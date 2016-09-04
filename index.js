@@ -1,18 +1,31 @@
-var fcgiApp = require("./fcgi"),
-	http = require("http");
 
-
-var myServer = http.createServer(function(req, res) {
-	setTimeout(function() {
-		res.writeHead(200, {"Content-type": "text/html"});
-		res.end("It works!" + Date.now());
-		console.log("Wrote response.");
-	}, 1000);
-	//throw new Error("Bollocks.");
+var router = express.Router(); // get an instance of the express Router
+// test route to make sure everything is working (accessed at GET http://localhost:8085/api)
+router.get('/', function (req, res) {
+    res.json({ message: 'GET request works' });
+});
+router.post('/webhook', function (req, res) {
+    var intent = req.body.result.metadata.intentName;
+    switch (intent) {
+        case "Initiate":
+            return {"im from webhook"};
+            break;
+        case "Billing":
+            res.json(billInquiry());
+            break;
+        case "yes-initiate":
+            res.json(recommendTV());
+            break;
+        case "Recommendation":
+            res.json(recommendTV());
+            break;
+        default:
+            res.json(recommendTV());
+    }
 });
 
-// Instead of this:
-//myServer.listen(12345);
-
-// You do this:
-fcgiApp.handle(myServer);
+// START THE SERVER
+// =============================================================================
+app.listen(port);
+console.log('Node server started...');
+//# sourceMappingURL=server.js.map
