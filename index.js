@@ -8,7 +8,47 @@ router.post('/webhook', function (req, res) {
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
         case "Initiate":
-            return {"im from webhook"};
+            return {
+                
+                
+               {
+        speech: "Hi,there. I am Ent, an entertainment bot.  Would you like to see some recommendations for tonight?",
+        displayText: "TV Recommendations",
+        data: {
+            "facebook": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": "Hi,there. I am Ent, an entertainment bot.  Would you like to see some recommendations for tonight?",
+                        //"template_type":"generic",
+                        //"elements":[
+                        //	{
+                        //		"title":"Hi,there. I am Ent, an entertainment bot.",
+                        //		"image_url":"https://petersfancybrownhats.com/company_image.png",
+                        //		"subtitle":"Would you like to see some recommendations for tonight?",
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Yes",
+                                "payload": "Yes"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "No",
+                                "payload": "No"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        source: "Zero Service - app_zero.js"
+    }
+                
+                
+                
+            };
             break;
         case "Billing":
             res.json(billInquiry());
