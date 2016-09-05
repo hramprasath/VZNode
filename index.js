@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 console.log('my message server started...');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-var port = process.env.PORT || 5000; // set our port
+var PORT = process.env.PORT || 9000;
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); // get an instance of the express Router
