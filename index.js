@@ -16,6 +16,12 @@ router.get('/', function (req, res) {
     res.json({ message: 'GET request works' });
 });
 router.post('/webhook', function (req, res) {
+    res.json(recommendTV());
+    
+});
+
+
+function recommendTV() {
     return ({
         speech: "Here are some recommendations for tonight",
         displayText: "TV recommendations",
@@ -84,9 +90,7 @@ router.post('/webhook', function (req, res) {
         },
         source: "Zero Service - app_zero.js"
     });
-    
-});
-
+}
 // START THE SERVER
 // =============================================================================
 app.listen(port);
