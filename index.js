@@ -23,7 +23,7 @@ router.post('/webhook', function (req, res) {
 
 function recommendTV() {
     return ({
-        speech: "Here are some recommendations for tonight",
+        speech: "External call : Here are some recommendations for tonight",
         displayText: "TV recommendations",
         data: {
             "facebook": {
