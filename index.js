@@ -93,6 +93,7 @@ function recommendTV() {
 }
 // START THE SERVER
 // =============================================================================
-app.listen(port);
-console.log('Node server started...');
-//# sourceMappingURL=server.js.map
+app.use('/api', router);
+app.listen(PORT, function () {
+  console.log('Listening on port ' + PORT);
+});
