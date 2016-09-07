@@ -23,9 +23,7 @@ router.post('/webhook', function (req, res) {
 
 function recommendTV() {
     return ({
-        speech: "External call : Here are some recommendations for tonight",
-        displayText: "TV recommendations",
-        data: {
+           data: {
             "facebook": {
                 "attachment": {
                     "type": "template",
@@ -33,7 +31,7 @@ function recommendTV() {
                         "template_type": "generic",
                         "elements": [
                             {
-                                "title": "Shark Tank",
+                                "title": "External call - Shark Tank",
                                 "subtitle": "Shark Tank",
                                 "image_url": "http://image.vam.synacor.com.edgesuite.net/0f/07/0f07592094a2a596d2f6646271e9cb0311508415/w=414,h=303,crop=auto/?sig=88c390c980d4fa53d37ef16fbdc53ec3dfbad7d9fa626949827b76ae37140ac3&amp;app=powerplay",
                                 "buttons": [
@@ -87,8 +85,7 @@ function recommendTV() {
                     }
                 }
             }
-        },
-        source: "Zero Service - app_zero.js"
+        }
     });
 }
 // START THE SERVER
