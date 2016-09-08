@@ -22,8 +22,7 @@ router.post('/webhook', function (req, res) {
 
 
 function recommendTV() {
-    return ({
-           data: {
+    return ( {
             "facebook": {
                 "attachment": {
                     "type": "template",
@@ -86,7 +85,7 @@ function recommendTV() {
                 }
             }
         }
-    });
+   );
 }
 // START THE SERVER
 // =============================================================================
