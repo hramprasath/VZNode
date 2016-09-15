@@ -1,24 +1,97 @@
-
-var express = require('express'); // call express
-var app = express(); // define our app using express
+var express = require('express');
+var request = require('request');
 var bodyParser = require('body-parser');
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-console.log('my message server started...');
+var servercall = require('./servicecall.js');
+
+var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var PORT = process.env.PORT || 9000;
-// ROUTES FOR OUR API
-// =============================================================================
-var router = express.Router(); // get an instance of the express Router
-// test route to make sure everything is working (accessed at GET http://localhost:8085/api)
-router.get('/', function (req, res) {
-    res.json({ message: 'GET request works' });
-});
+
+var router = express.Router(); 
+
 router.post('/webhook', function (req, res) {
-    res.json(recommendTV());
-    
+//app.post('/webhook', function (req, res) {
+  //var intent = req.body.result.metadata.intentName;
+  var intent = req.body.result.action;
+  var mysource = req.body.result.source;
+ console.log('Calling from :' + mysource) ;
+    switch (intent) {
+        case "welcome":
+             res.json(welcome());
+            break;
+        case "Billing":
+            res.json(billInquiry());
+            break;
+        case "showrecommendation":
+            res.json(recommendTV());
+            break;
+        case "Recommendation":
+            res.json(recommendTV());
+            break;
+        case "record":
+            res.json(record(req));
+            break;
+        case "upsell":
+            res.json(upsell(req));
+            break;
+        case "externalcall":
+            recommendTVNew(function (str) { 
+                console.log("inside showrecommendation "); 
+                res.json(recommendTVNew1(str)); 
+            }); 
+            break;
+        default:
+            res.json(recommendTV());
+    }
 });
+
+function welcomeMsg()
+{
+    
+    return (
+        {
+             speech: " Hey Tabi, Welcome to Verizon!",
+            
+        },
+        
+        {
+        speech: "Want to know what's on tonight? When your favourite sports team is playing? What time your favourite show is coming on? I can answer almost anything, so try me! 
+        
+        Link me to your Verizon account and I can send you alerts and important status changes through Messenger
+        ",
+        displayText: "Subscribe",
+        data: {
+            "facebook": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": " "Want to know what's on tonight? When your favourite sports team is playing? What time your favourite show is coming on? I can answer almost anything, so try me! 
+        
+        Link me to your Verizon account and I can send you alerts and important status changes through Messenger
+        ",
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Link Account",
+                                "payload": "Link Account"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        source: "Verizon.js"
+    }
+    
+    
+    );	
+	
+}
+    
+}
+
 
 
 function recommendTV() {
