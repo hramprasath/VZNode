@@ -12,12 +12,19 @@ var router = express.Router();
 
 router.post('/webhook', function (req, res) {
 	
-	res.json(recommendTV());
-	
+
+ recommendTVNew(function (str) { 
+                console.log("inside showrecommendation "); 
+                res.json(recommendTVNew1(str)); 
+            }); 
+
+
 //app.post('/webhook', function (req, res) {
   //var intent = req.body.result.metadata.intentName;
  /* var intent = req.body.result.action;
   var mysource = req.body.result.source;
+  intent = 'externalcall';
+  
  console.log('Calling from :' + mysource) ;
     switch (intent) {
         case "welcome":
