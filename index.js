@@ -11,6 +11,9 @@ var PORT = process.env.PORT || 9000;
 var router = express.Router(); 
 
 router.post('/webhook', function (req, res) {
+	
+	res.json(recommendTV());
+	
 //app.post('/webhook', function (req, res) {
   //var intent = req.body.result.metadata.intentName;
  /* var intent = req.body.result.action;
@@ -45,7 +48,7 @@ router.post('/webhook', function (req, res) {
             res.json(recommendTV());
     }*/
     
-     res.json(recommendTV())
+     
 });
 
 function welcomeMsg()
