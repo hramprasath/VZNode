@@ -13,10 +13,8 @@ var router = express.Router();
 router.post('/webhook', function (req, res) {
 	
 
- recommendTVNew(function (str) { 
-                console.log("inside showrecommendation "); 
-                res.json(recommendTVNew1(str)); 
-            }); 
+                res.json(recommendTV()); 
+
 
 
 //app.post('/webhook', function (req, res) {
@@ -57,47 +55,6 @@ router.post('/webhook', function (req, res) {
     
      
 });
-
-function welcomeMsg()
-{
-    
-    return (
-        {
-             speech: " Hey Tabi, Welcome to Verizon!",
-            
-        },
-        
-        {
-        speech: "Want to know what's on tonight? When your favourite sports team is playing? What time your favourite show is coming on? I can answer almost anything, so try me!    Link me to your Verizon account and I can send you alerts and important status changes through Messenger    ",
-        displayText: "Subscribe",
-        data: {
-            "facebook": {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "button",
-                        "text": " Want to know what's on tonight? When your favourite sports team is playing? What time your favourite show is coming on? I can answer almost anything, so try me!         Link me to your Verizon account and I can send you alerts and important status changes through Messenger ",
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Link Account",
-                                "payload": "Link Account"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        source: "Verizon.js"
-    }
-    
-    
-    );	
-	
-}
-    
-}
-
 
 
 function recommendTV() {
